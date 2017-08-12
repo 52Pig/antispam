@@ -361,7 +361,7 @@ object Antispm extends App {
   //===============================================================
   val fs = FileSystem.get(sc.hadoopConfiguration)
   // 获取放置urlcount表的文件夹路径
-  val fpath = new Path("hdfs:///logdata/wireless/mds/l_mobile_mds_guid_urlcount_detail/")
+  val fpath = new Path("hdfs:///user/analyst/leaf/urlcount_detail/")
   // 获取文件夹中的文件夹的路径
   var flist = fs.listStatus(fpath).map(_.getPath)
   // 第一个路径总是20160101，所以删除之。
@@ -381,7 +381,7 @@ object Antispm extends App {
     if (datafileexists && !resultfileexists) {
       println(date)
       // 先删除可能存在的未完成的概率表文件夹，文件夹中会包括概率表、VV的总量概率表、TS的总量概率表
-      fs.delete(new Path("hdfs:///user/analyst/gww/"+date), true)
+      fs.delete(new Path("hdfs:///user/analyst/leaf/"+date), true)
       // 获取urlcount全量数据
       val daterdd = sc.textFile(filename)
       // 取urlcount中的guid、os、dev，以及vv和ts并生成 DataFrame
